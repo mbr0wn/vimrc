@@ -1,247 +1,186 @@
 " Vim syntax file
-" Language:	   DokuWiki
-" Version:     0.1
-" Maintainer:	 Bill Powell <bill@billpowellisalive.com> http://billpowellisalive.com
-" Last Change: 2008 Sep 11, 12:53 Thu
+" Language: dokuwiki
+" Last Change: 2012-05-23
+" Maintainer: Florian Preinstorfer <nblock@archlinux.org>
+" URL: https://github.com/nblock/vim-dokuwiki
+" License: same as vim itself
+" Reference: http://www.dokuwiki.org/syntax
+" Credits:
+"   Bill Powell <bill@billpowellisalive.com> -- original dokuwiki syntax file
+"   Hou Qingping <dave2008713@gmail.com> -- new features (combinations, footnote, quotes), bug fixes
+"   Sören König <soeren-koenig@freenet.de> -- zim syntax file
+"   Vladimir Zhbanov <vzhbanov@gmail.com> -- a lot of patches
 
-"Based on Wikipedia.vim syntax file.  Still rather a hack.
-"Please let me know if you find errors or make improvements.
-"Do note the heading mappings below, though. Use 
-"
-"TODO Might have to tweak Wikimedia.vim because at the end it unlets main_syntax. Hmm.
-"
-"AUTOMATIC MATCHING {{{1
-
-"At present, you have to activate this highlighting manually.
-":se ft=dokuwiki
-
-"because there isn't a canonical extension for DokuWiki
-"files (at least, that I know of). However, you can set all
-"*.txt files to automatically be set to DokuWiki if you
-"wish.
-"
-"(Modified from http://en.wikipedia.org/wiki/Wikipedia:Text_editor_support#Vim)
-
-"Make or edit $HOME/.vim/ftdetect/txt.vim.
-"And, without comments, add the following:
-"
-"augroup filetypedetect
-	"au BufNewFile,BufRead *.txt,*.wiki setf dokuwiki
-"augroup END
-
-"}}}1
-"
-"==============================================
-"And now, the syntax file:
-
-syntax clear
-so $VIM/syntax/Wikipedia.vim
-
-"Mappings {{{1
-"
-"This should allow you to press ",,h1" in INSERT mode, then
-"type your header, then press <C-j> to jump to the next
-"line.  
-"
-"(If <C-j> doesn't jump for you, let me know; this
-"may require latex-suite (http://vim-latex.sf.net), but that
-"would be a hefty thing to download just for this.)
-"
-"Darn huge DokuWiki headings:
-imap <buffer> ,,h1 ====== <++> ======<++><Esc>k0<C-J>
-imap <buffer> ,,h2 ===== <++> =====<++><Esc>k0<C-J>
-imap <buffer> ,,h3 ==== <++> ====<++><Esc>k0<C-J>
-imap <buffer> ,,h4 === <++> ===<++><Esc>k0<C-J>
-imap <buffer> ,,h5 == <++> ==<++><Esc>k0<C-J>
-imap <buffer> ,,h6 = <++> =<++><Esc>k0<C-J>
-
-"promote and demote
-imap <buffer> ,,hd <Esc>:s#=\(.*\)=#\1#<CR>:let @/ = ""<CR>
-nmap <buffer> ,,hd :s#=\(.*\)=#\1#<CR>:let @/ = ""<CR>
-imap <buffer> ,,hp <Esc>:s#\(.*\)#=\1=#<CR>:let @/ = ""<CR>
-nmap <buffer> ,,hp :s#\(.*\)#=\1=#<CR>:let @/ = ""<CR>
-
-"}}}1
-
-
-"From Wikipedia.vim
-"Need this function for html.
-"
-if version < 508
-  command! -nargs=+ HtmlHiLink hi link <args>
-else
-  command! -nargs=+ HtmlHiLink hi def link <args>
+" initial checks. See `:help 44.12`
+if exists("b:current_syntax")
+ finish
 endif
-let main_syntax = 'html'
 
+if version < 600
+ syntax clear
+elseif exists("b:current_syntax")
+ finish
+endif
 
-"==============================================
+"Settings
+" Set shift width for indent
+setlocal shiftwidth=2
+" Set the tab key size to two spaces
+setlocal softtabstop=2
+" Let tab keys always be expanded to spaces
+setlocal expandtab
 
-"Need to clear wikiLink, start over.
-syn clear wikiLink 
-"Note you don't want to match on \\ if it's http:\\
-"Fortunately, a judicious match of wikiLink trumps wikiItalic.
-syn region wikiLink start="\[\[" end="\]\]\(s\|'s\|es\|ing\|\)" contains=wikiLink,wikiTemplate
-"Special match for links not in brackets.
-syn region wikiHttp start=+\(\(http\|https\|ftp\|gopher\|news\|mailto\):\/\/\|www\.\)+ end=+ +me=e-1
+""" Patterns
+" Keywords
+syn match dokuwikiLinebreak /\(\\\\$\|\\\\ \)/
 
-syn match wikiEmail /<[a-zA-Z_.0-9-]*@[a-zA-Z_.0-9-]*>/
-syn region wikiItalic			start=+\/\/+	end=+\/\/+ contains=@Spell,wikiLink,wikiItalicBold
-syn region wikiBold				start=+\*\*+			end=+\*\*+ contains=@Spell,wikiLink,wikiBoldItalic
-syn region wikiBoldAndItalic	start=+'''''+		end=+'''''+ contains=@Spell,wikiLink
+" No wiki regions
+syn region dokuwikiNowiki start=+%%+ end=+%%+
+syn region dokuwikiNowiki start=+<nowiki>+ end=+</nowiki>+
 
-"TODO Make combinations work. Maybe.
+" Heading
+syn match dokuwikiHeading1 /^\s*=\{6}[^=]\+.*[^=]\+=\{6}\s*$/
+syn match dokuwikiHeading2 /^\s*=\{5}[^=]\+.*[^=]\+=\{5}\s*$/
+syn match dokuwikiHeading3 /^\s*=\{4}[^=]\+.*[^=]\+=\{4}\s*$/
+syn match dokuwikiHeading4 /^\s*=\{3}[^=]\+.*[^=]\+=\{3}\s*$/
+syn match dokuwikiHeading5 /^\s*=\{2}[^=]\+.*[^=]\+=\{2}\s*$/
 
-syn region wikiUnderline			start=+__+	end=+__+ contains=@Spell,wikiLink
-syn match wikiLinebreak /\\\\/ 
+" Highlight
+syn region dokuwikiBold start="\*\*" end="\*\*" contains=ALLBUT,dokuwikiBold,@dokuwikiNoneTextItem extend
+syn region dokuwikiItalic start="\/\/" end="\/\/" contains=ALLBUT,dokuwikiItalic,@dokuwikiNoneTextItem extend
+syn region dokuwikiUnderlined start="__" end="__" contains=ALLBUT,dokuwikiUnderlined,@dokuwikiNoneTextItem extend
+syn region dokuwikiMonospaced start="''" end="''" contains=ALLBUT,dokuwikiMonospaced,@dokuwikiNoneTextItem extend
 
-"Wikipedia italic is Dokuwiki mono. Hmm.
-syn region wikiMono			start=+'\@<!'''\@!+	end=+''+ contains=@Spell
-syn region wikiDel			start=+<del>+	end=+</del>+ contains=@Spell
+syn region dokuwikiStrikethrough start="<del>" end="</del>" contains=ALLBUT,@dokuwikiNoneTextItem,dokuwikiStrikethrough extend
+syn region dokuwikiSubscript start="<sub>" end="</sub>" contains=ALLBUT,@dokuwikiNoneTextItem,dokuwikiStrikethrough extend
+syn region dokuwikiSuperscript start="<sup>" end="</sup>" contains=ALLBUT,@dokuwikiNoneTextItem,dokuwikiStrikethrough extend
 
+" Smileys: http://github.com/splitbrain/dokuwiki/blob/master/conf/smileys.conf
+syn match dokuwikiSmiley "\(8-)\|8-O\|8-o\|:-(\|:-)\|=)\|:-\/\|:-\\\)" contains=@NoSpell
+syn match dokuwikiSmiley "\(:-\\\|:-?\|:-D\|:-P\|:-o\|:-O\|:-x\)" contains=@NoSpell
+syn match dokuwikiSmiley "\(:-X\|:-|\|;-)\|m(\|\^_\^\|:?:\|:!:\)\|LOL\|FIXME\|DELETEME" contains=@NoSpell
 
-"syn clear wikiParaFormatChar
+" Entities: http://github.com/splitbrain/dokuwiki/blob/master/conf/entities.conf
+syn match dokuwikiEntities "\(<->\|->\|<-\|<=>\|640x480\)" contains=@NoSpell
+syn match dokuwikiEntities "\(=>\|<=[^>]\|>>\|<<\|---\|--\)" contains=@NoSpell
+syn match dokuwikiEntities "\((c)\|(tm)\|(r)\|\.\.\.\)" contains=@NoSpell
 
-"Too many emoticons.
-syn match wikiKeyword /\(8-)\|8-O\|:-(\|:-)\|=)\|:-\/\|:-\\\\\|:-?\|:-D\|:-P\|:-O\|:-X\|:-|\|;-)\|\^_\^\|:?:\|:!:\|LOL\|FIXME\|DELETEME\)/
-"TODO Get the broken ones to work. :)
-"Typeset characters
-syn match wikiKeyword /\(->\|<\(-\|=\)\(>\)\=\|=>\|<=\|>>\|<<\|--\(-\)\=\|640x480\|(c)\|(tm)\|(r)\)/
-"TODO Brackets
-"syn match wikiKeyword /\[\[\|\]\]\|{{\|}}/ containedin=wikiLink
+"Cluster most common items
+syn cluster dokuwikiTextItems contains=dokuwikiBold,dokuwikiItalic,dokuwikiUnderlined,dokuwikiMonospaced,dokuwikiStrikethrough
+syn cluster dokuwikiTextItems add=dokuwikiSubscript,dokuwikiSuperscript,dokuwikiSmiley,dokuwikiEntities
+syn cluster dokuwikiTextItems add=dokuwikiExternalLink,dokuwikiInternalLink,dokuwikiMediaLink
+syn cluster dokuwikiTextItems add=dokuwikiFootnotes,dokuwikiLinebreak,dokuwikiNowiki,dokuwikiCodeBlock,dokuwikiFileBlock
+syn cluster dokuwikiNoneTextItem contains=ALLBUT,@dokuwikiTextItems
 
-"Lists
-syn match wikiKeyword /^\(\s\s\)*[*-] / containedin=wikiPre
+" Links: http://github.com/splitbrain/dokuwiki/blob/master/conf/scheme.conf
+syn region dokuwikiExternalLink start=+\(http\|https\|telnet\|gopher\|wais\|ftp\|ed2k\|irc\|ldap\):\/\/\|www\.+ end=+\(\ze[.,?:;-]*\_[^a-zA-Z0-9~!@#%&_+=/.,?:;-]\)+ contains=@NoSpell
+syn region dokuwikiInternalLink matchgroup=dokuwikiLink start="\[\[" end="\]\]" contains=@NoSpell,dokuwikiLinkMedia,dokuwikiLinkNoMedia keepend extend
+syn region dokuwikiLinkMedia matchgroup=dokuwikiLink start="|{{"ms=s-1,rs=s+1 end="}}\]\]"me=e-2,re=e-2 contained contains=dokuwikiInternalMediaLink,dokuwikiLinkCaption keepend
+syn region dokuwikiLinkNoMedia matchgroup=dokuwikiLink start="|\({{\)\@!"ms=s-1,rs=s+1 end="\]\]" contained contains=dokuwikiLinkCaption keepend
+syn region dokuwikiLinkCaption start="." end="\]\]"me=e-2 contained
 
-syn region wikiNowiki start=+%%+ end=+%%+
-syn region wikiNowiki start=+<nowiki>+ end=+</nowiki>+
+" Images and other files
+syn match dokuwikiMediaSeparator "|" contained nextgroup=dokuwikiMediaCaption
+syn region dokuwikiMediaCaption start="." end="}}"me=e-2 contained
+syn region dokuwikiMediaLink matchgroup=dokuwikiLink start="{{" end="}}" contains=@NoSpell,dokuwikiMediaSeparator extend
+syn match dokuwikiInternalMediaLink "{{\(\(}\|]]\)\@!\_.\)*}}\(]]\)\@=" contained contains=@NoSpell,dokuwikiMediaLink
 
-"TODO : Fix <code> hack, which doesn't really keep all code snippets
-"clean.
-syn region wikiCode start=+<\(file\|code\)+ms=s+5 end=+</\(file\|code\)>+me=e-7 contains=@Spell 
-"Dangerous things in the dang code block.
-"TODO figure out how to not have to match these individually.
-"C comments: eternal bold
-syn match wikiKeyword /\/\*\*/ 
+"Control Macros
+syn region dokuwikiControlMacros start="\~\~" end="\~\~" contains=@NoSpell
 
-syn region wikiFootnote start=+((+ end=+))+
-syn region wikiInstruction start=+\~\~+ end=+\~\~+
+"Code Blocks
+syn region dokuwikiCodeBlockPlain start="^\(  \|\t\)\s*[^*-]" end="$"
+syn region dokuwikiCodeBlock start="<code\(\s[^>]\+\)\?>"rs=s end="</code>"re=e contains=dokuwikiCodeBlockContent,dokuwikiCodeLang keepend extend
+syn region dokuwikiFileBlock start="<file\(\s[^>]\+\)\?>"rs=s end="</file>"re=e contains=dokuwikiFileBlockContent,dokuwikiCodeLang keepend extend
+syn region dokuwikiCodeBlockContent start=">"ms=e+1 end="</code>"me=s-1 contained
+syn region dokuwikiFileBlockContent start=">"ms=e+1 end="</file>"me=s-1 contained
+syn region dokuwikiCodeLang start="\s\+\zs" end=">"me=e-1 contained contains=dokuwikiCodeFileName,@NoSpell
+syn region dokuwikiCodeFileName start="\zs\s\+" end=">"me=e-1 contained contains=@NoSpell
 
-syn match wikiQ1 /^\s*>.*/ containedin=wikiPre
-syn match wikiQ2 /^\s*>>.*/ containedin=wikiPre
-syn match wikiQ3 /^\s*>>>.*/ containedin=wikiPre
-syn match wikiQ4 /^\s*>>>>.*/ containedin=wikiPre
-"Four is quite enough, young man.
+" Lists
+syn match dokuwikiList "^\(  \|\t\)\s*[*-]" contains=@dokuwikiTextItems
 
-"Dokuwiki headings are the reverse of Wikipedia headings: H1 is
-"====== H1 ======, not = H1 =. 
-"It looks cooler, but you need a mapping for hi-level headings!
-syn region wikiH6 start="^=" 		end="=" 	skip="<nowiki>.*</nowiki>" oneline contains=@Spell,wikiLink
-syn region wikiH5 start="^==" 		end="==" 	skip="<nowiki>.*</nowiki>" oneline contains=@Spell,wikiLink
-syn region wikiH4 start="^===" 		end="===" 	skip="<nowiki>.*</nowiki>" oneline contains=@Spell,wikiLink
-syn region wikiH3 start="^====" 	end="====" 	skip="<nowiki>.*</nowiki>" oneline contains=@Spell,wikiLink
-syn region wikiH2 start="^=====" 	end="=====" 	skip="<nowiki>.*</nowiki>" oneline contains=@Spell,wikiLink
-syn region wikiH1 start="^======" 	end="======" 	skip="<nowiki>.*</nowiki>" oneline contains=@Spell,wikiLink
+"Quotes
+syn match dokuwikiQuotes /^>\+ /
 
+"Footnotes
+syn region dokuwikiFootnotes start=/((/ end=/))/ contains=ALLBUT,dokuwikiFootnotes,@dokuwikiNoneTextItem extend
 
-
-"Special tags: probably only work with div-shorthand plugin by Joe Lapp.
-"See http://wiki.splitbrain.org/plugin:div_span_shorthand
-"I'm using the modified version at the bottom of the page.
-"Allows you to insert div tags when you need them without needing 
-"to allow html.
-
-"Blockquote and Cite. 
-"To use these, you'll have to use a strict syntax.
-"
-"#blockquote[
-"Your quote can be as many lines as you want.
-"But when you're done, the final tag must be on its own line.
-"This is so you can have an option citation:
-"#cite[Kenneth Grahame, //Wind in the Willows//]#
-"]#
-"
-"If the final tag isn't on its own line, it won't work.
-"
-"Also note that this is div.blockquote and div.cite, NOT the html tags
-"<blockquote> and <cite>. You'll want to keep that in mind for your
-"css file. :)
-"
-"If DokuWiki didn't insert <BR>'s after each line in a blockquote, you
-"wouldn't need this silliness.
-"
-syn match wikiKeyword /#\(blockquote\|cite\)\[/ containedin=wikiBlockquote
-"TODO: Get ending bracket to match without breaking Blockquote
-"environment.
-"syn match wikiKeyword /\]#/ containedin=wikiBlockquote,wikiCite
-syn region wikiBlockquote start=+^#blockquote\[+ 	end=+^\]#+ contains=@Spell,wikiLink,wikiCite,wikiParaFormatChar
-syn region wikiCite start=+^#cite\[+ 	end=+\]#+ oneline contains=@Spell,wikiLink,wikiKeyword
-
-"Comments: requires 'comments' plugin by Esther Bruner.
-syn clear htmlCommentError
-"TODO Get to work for multi-line comments.
-syn region wikiComment start=+\/\*+	end=+\*\/+ contains=wikiPre
-
-"COLORS not covered in Wikipedia.vim
-
-hi link wikiHttp	wikiLink
-hi link wikiEmail	wikiLink
-hi link wikiUnderline	htmlUnderline
-"NOTE : Ignore is occasionally invisible, depending on your scheme.
-hi link wikiNowiki	Ignore
-hi link wikiCode wikiPre
-hi link wikiInstruction Exception
-hi link wikiMono	Todo
-hi link wikiDel	Error
-hi link wikiLinebreak	Keyword
-hi link wikiKeyword	Keyword
-hi link wikiBlockquote Type
-hi link wikiComment Comment
-"Perhaps it's confusing to have anything besides Comments be
-"highlighted as comments. But I figure comments in wikis will be quite
-"rare. You may disagree.
-hi link wikiFootnote Comment
-hi link wikiCite Comment
-
-"The quote levels will tend to intersect with the headings,
-"depending on color scheme. Ah well.
-"If you go to syntax.txt and look at the NAMING CONVENTIONS, you'll
-"see I tried to choose groups here that'd match up with lower-level
-"headings, to avoid confusion whenever possible. Basically, work my
-"way back UP the ladder with quotes.
-hi link wikiQ1 StorageClass
-hi link wikiQ2 Conditional
-hi link wikiQ3 Include
-hi link wikiQ4 String
-
-"Colors I relinked.
-hi link wikiPre Special
-
-"Why not give each heading a different color?
-hi link htmlH1	Title 
-hi link htmlH2	Identifier
-hi link htmlH3	Constant
-hi link htmlH4	PreProc   
-hi link htmlH5	Statement 
-hi link htmlH6	Type
-
-
-
-"Tables need to come after this, for some reason.
 "Tables
-syn match wikiKeyword /[|\^]/ containedin=wikiPre,wikiTableCell,wikiTableHeading
-syn match wikiTableCell /\s*|.*/ containedin=wikiPre
-syn match wikiTableHeading /\s*\^.*/ containedin=wikiPre
+syn region dokuwikiTable start="^[|\^]" end="$" contains=dokuwikiTableRow transparent keepend
+syn region dokuwikiTableRow start="[|\^]" end="\ze[|\^]" transparent contained contains=dokuwikiTableSeparator,dokuwikiTableRowspan,@dokuwikiTextItems keepend
+syn match dokuwikiTableSeparator "[|\^]" contained
+syn match dokuwikiTableRowspan "[|\^]\s*:::\ze\s*[|\^]" contained transparent contains=dokuwikiRowspan,dokuwikiTableSeparator
+syn match dokuwikiRowspan ":::" contained
 
+" Embedded html/php
+syn region dokuwikiEmbedded start="<html>" end="</html>"
+syn region dokuwikiEmbedded start="<HTML>" end="</HTML>"
+syn region dokuwikiEmbedded start="<php>" end="</php>"
+syn region dokuwikiEmbedded start="<PHP>" end="</PHP>"
 
-hi link wikiTableCell PreCondit
-hi link wikiTableHeading Character
-
-" CLOSE DOWN, from Wikipedia.vim
-let b:current_syntax = "html"
-
-delcommand HtmlHiLink
-
-if main_syntax == 'html'
-  unlet main_syntax
+"Comment: requires http://www.dokuwiki.org/plugin:comment
+if exists("dokuwiki_comment")
+  syn region dokuwikiComment start="/\*" end="\*/"
 endif
+
+"Horizontal line
+syn match dokuwikiHorizontalLine "^\s\?----\+\s*$"
+
+""" Highlighting
+hi link dokuwikiLinebreak Keyword
+
+hi link dokuwikiNowiki Exception
+
+hi link dokuwikiHeading1 Title
+hi link dokuwikiHeading2 Title
+hi link dokuwikiHeading3 Title
+hi link dokuwikiHeading4 Title
+hi link dokuwikiHeading5 Title
+
+hi def dokuwikiBold term=bold cterm=bold gui=bold
+hi def dokuwikiItalic term=italic cterm=italic gui=italic
+hi link dokuwikiUnderlined Underlined
+hi link dokuwikiMonospaced Type
+hi link dokuwikiStrikethrough DiffDelete
+hi link dokuwikiSubscript Special
+hi link dokuwikiSuperscript Special
+
+hi link dokuwikiExternalLink Underlined
+hi link dokuwikiInternalLink Underlined
+hi link dokuwikiLinkCaption Label
+hi link dokuwikiLink Comment
+hi link dokuwikiMediaSeparator Comment
+hi link dokuwikiMediaCaption Label
+hi link dokuwikiMediaLink Include
+
+hi link dokuwikiSmiley Todo
+hi link dokuwikiEntities Keyword
+
+hi link dokuwikiList Identifier
+
+hi link dokuwikiControlMacros Constant
+
+hi link dokuwikiCodeBlockPlain String
+hi link dokuwikiCodeBlockContent String
+hi link dokuwikiFileBlockContent String
+hi link dokuwikiCodeBlock Comment
+hi link dokuwikiFileBlock Comment
+hi link dokuwikiCodeLang Tag
+hi link dokuwikiCodeFileName Include
+
+hi link dokuwikiQuotes Visual
+
+hi link dokuwikiFootnotes Comment
+
+hi link dokuwikiTableSeparator Label
+hi link dokuwikiRowspan NonText
+
+hi link dokuwikiEmbedded String
+
+hi link dokuwikiComment Comment
+
+hi link dokuwikiHorizontalLine NonText
+
+"set name
+let b:current_syntax = "dokuwiki"
