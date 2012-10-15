@@ -42,3 +42,5 @@ QAM
 QPSK
 bistatic
 sidelobes
+SINR
+periodogram's

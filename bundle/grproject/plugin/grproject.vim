@@ -60,28 +60,39 @@ EOP
 endfunc
 
 
-" Find the 'gnuradio.project' file. If it exists, return the project name.
+" Find the CMakeLists.txt file. If it exists, return the project name.
 " If not, return False
 func! GRFindProjectFile()
-	" We look in the files dir and the one above
-	let prjfile = findfile('gnuradio.project', expand('%:p:h'))
-	if !prjfile
-		let prjfile = findfile('gnuradio.project', expand('%:p:h').'/..')
+	" We look in the file's dir and the one above
+	let makefile = findfile('CMakeLists.txt', expand('%:p:h'))
+	if !makefile
+		let makefile = findfile('CMakeLists.txt', expand('%:p:h').'/..')
 	endif
-	if !filereadable(prjfile)
+	if !filereadable(makefile)
 		return 0
 	endif
-	let b:GRProjectPath = fnamemodify(prjfile, ':p:h')
-	let regexp = '^.*projectname\s*=\s*\([A-Za-z0-9_-]\)'
-	for line in readfile(prjfile)
+	let project_path = fnamemodify(makefile, ':p:h')
+	let project_name = 0
+	let is_gr_project = 0
+	for line in readfile(makefile)
 		if line =~ '^#'
 			continue
 		endif
-		if line =~ 'projectname'
-			let b:GRProjectName = substitute(line, regexp, '\1', '')
-			return 1
+		if line =~? 'project(gr-[a-zA-Z_-]'
+			let project_name = substitute(line, 'project(gr-\([A-Za-z0-9_-]\+\).*$', '\1', '')
+		endif
+		if line =~? 'find_package(GnuradioCore)'
+			let is_gr_project = 1
+			if project_name
+				break
+			endif
 		endif
 	endfor
+	if !empty(project_name) && is_gr_project
+		let b:GRProjectPath = project_path
+		let b:GRProjectName = project_name
+		return 1
+	end
 	return 0
 endfunc
 

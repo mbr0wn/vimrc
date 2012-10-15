@@ -1,14 +1,16 @@
 " Create PDF via DVI
 let g:Tex_FormatDependency_pdf = 'dvi,ps,pdf'
+let g:Tex_FormatDependency_ps = 'dvi,ps'
 let g:Tex_CompileRule_dvi = 'latex -src-specials -interaction=nonstopmode $*'
 let g:Tex_CompileRule_ps = 'dvips -o $*.ps $*.dvi'
 let g:Tex_CompileRule_pdf = 'ps2pdf $*.ps'
-let g:Tex_ViewRule_dvi = 'okular'
-let g:Tex_ViewRule_ps  = 'okular'
-let g:Tex_ViewRule_pdf = 'okular'
+let g:Tex_ViewRule_dvi = 'evince'
+let g:Tex_ViewRule_ps  = 'evince'
+let g:Tex_ViewRule_pdf = 'evince'
 let g:Tex_Menus = 0
 
 call IMAP('ESI', "\\SI{<++>}{<++>}<++>", 'tex')
+call IMAP('EFM', "\\begin{frame}\<cr> \\frametitle{<++>}\<cr> \\begin{itemize}\<cr> \\item <++>\<cr> \\end{itemize}<++>\<cr> \\end{frame}\<cr>", 'tex')
 
 set tabstop=2      " 4-space tab
 set shiftwidth=2   " This allows you to use the < and > keys from VIM's visual  mode to block indent/unindent
