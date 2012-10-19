@@ -10,13 +10,18 @@ compiler pylint
 
 " Execute file being edited
 map <buffer> <F5> :w<CR>:!/usr/bin/env python % <CR>
+map <buffer> <S-F5> :w<CR>:Pyclewn pdb %:p<CR>
 
 " Execute a selection of code (very cool!)
-" " Use VISUAL to select a range and then hit ctrl-h to execute it.
+" Use VISUAL to select a range and then hit F9 to execute it.
 python << EOP
 import vim
 def EvaluateCurrentRange():
 	eval(compile('\n'.join(vim.current.range),'','exec'),globals())
 EOP
 map <F9> :py EvaluateCurrentRange()<CR>
+
+map <S-F7> :C import sys; sys.exit(1)<CR>
+map <F10> :C next<CR>
+map <F11> :C step<CR>
 

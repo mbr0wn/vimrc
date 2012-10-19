@@ -23,37 +23,6 @@ highlight WhiteSpaceEOL ctermbg=darkgreen guibg=lightgreen
 match WhiteSpaceEOL /\s\+$/
 autocmd WinEnter * match WhiteSpaceEOL /\s\+$/
 
-"""""" Custom controls """"""""""""""
-let mapleader = ','
-
-" map colon to space bar (never need it in command mode anyway)
-nmap <Space> :
-
-" ctrl-tab through tabs
-map <C-Tab> :tabnext<Enter>
-map <C-S-Tab> :tabprev<Enter>
-
-" tab through bufs
-map <Tab> :bnext<Enter>
-map <S-Tab> :bprev<Enter>
-
-" tab shortkeys
-map <leader>tn :tabnew %<cr>
-map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove 
-
-map <C-F12> :TMiniBufExplorer<cr>
-
-" Ctrl-Backspace kill current word
-imap <C-BS> 
-nmap <C-BS> bdw
-
-nmap <F2> :NERDTreeToggle<CR>
-imap <F2> <ESC>:NERDTreeToggle<CR>
-
-" Omnicompletion on Ctrl-Space
-inoremap <C-Space> <C-X><C-O>
-
 """""" Mini buffer explorer """""""""
 let g:miniBufExplSplitBelow = 0
 let g:miniBufExplModSelTarget = 1
@@ -64,11 +33,6 @@ let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMaxSize = 30
 "let g:miniBufExplForceSyntaxEnable = 1
 
-
-"""""" VCS command (SVN, git, ...) """""""""
-augroup VCSCommand
-  au VCSCommand User VCSBufferCreated silent! nmap <unique> <buffer> q :bwipeout<cr>
-augroup END
 
 """""" Filetype-specific hacks """"""
 filetype plugin indent on
@@ -85,7 +49,6 @@ autocmd BufEnter Makefile* :set filetype=make
 
 """""" CTags and tag list """"""""""""""""""""""
 command MkTags :!ctags -R --c++-kinds=+pl --fields=+iaS --extra=+q .
-let Tlist_Use_Right_Window = 1
 
 
 """""" OmniCppComplete """""""""""""""""""""""""
@@ -100,6 +63,10 @@ let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 " automatically open and close the popup menu / preview window
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview
+
+let g:syntastic_mode_map = { 'mode': 'active',
+						   \ 'active_filetypes': [],
+						   \ 'passive_filetypes': ['python'] }
 
 
 """""" Pathogen """"""""""""""""""""""""""""""""
