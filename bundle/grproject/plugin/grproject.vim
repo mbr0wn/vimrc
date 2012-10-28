@@ -25,74 +25,50 @@ autocmd grproject BufNewFile,BufReadPost *.cc,*.h,*.py,CMakeLists.txt call GRChe
 
 " Check if this file is part of a GNU Radio project
 func! GRCheckForProject()
-	if exists('b:GRProjectName') && 0
+	if exists('b:grproject_check') && 0
 		" Then this was already called
 		return
 	else
-		if !GRFindProjectFile()
-			" Then this is no project
-			return
-		end
+		call GRSetupProject()
+		let b:grproject_check = 1
 	endif
-	let &l:makeprg = 'cd '.b:GRProjectPath.'/build; make'
-	let &l:path = &g:path.b:GRProjectPath.'/include,'
-	"call GRSetupSyntastic()
 endfunc
 
-" Set some stuff for syntastic
-func! GRSetupSyntastic()
+
+func! GRSetupProject()
+" Calls 'gr_modtool info' and sets up:
+" * include dirs (for syntastic)
+" * search paths
+" * make command
 python << EOP
 import vim
-import re
-cmfilename = vim.eval('b:GRProjectPath') + '/build/CMakeCache.txt'
-pattern = 'PC_GNURADIO_CORE_STATIC_CFLAGS:INTERNAL=(.*)'
-p = re.compile(pattern)
-cmfile = open(cmfilename, 'r')
-cppflags = '-I%s/include ' % vim.eval('b:GRProjectPath')
-for line in cmfile:
-	if p.match(line):
-		cflags = p.match(line).groups()[0].split(';')
-		for flag in cflags:
-			cppflags += flag + ' '
-		break
-vim.command("let b:syntastic_cpp_cflags = '%s'" % cppflags)
+import os
+
+def setup_buffer(mod_info):
+    if not 'modname' in mod_info.keys():
+        return
+    vim.command("let b:grproject_name = '%s'" % mod_info['modname'])
+    try:
+        include_cpp_flags = ' '.join(['-I%s' % x for x in mod_info['incdirs']])
+        vim.command("let b:syntastic_cpp_cflags = '%s'" % include_cpp_flags)
+    except KeyError:
+        pass
+    try:
+        vim.command("let &l:makeprg = 'cd %s; make'" % mod_info['build_dir'])
+    except KeyError:
+        pass
+    try:
+        paths = ','.join([x.replace(' ', r'\\\ ') for x in mod_info['incdirs']])
+        vim.command("let &l:path = &g:path . '%s'" % paths)
+    except KeyError:
+        pass
+
+try:
+	mod_info = eval(os.popen('gr_modtool.py info --python-readable').read().strip())
+	setup_buffer(mod_info)
+except OSError:
+    pass
+
 EOP
-endfunc
-
-
-" Find the CMakeLists.txt file. If it exists, return the project name.
-" If not, return False
-func! GRFindProjectFile()
-	" We look in the file's dir and the one above
-	let makefile = findfile('CMakeLists.txt', expand('%:p:h'))
-	if !makefile
-		let makefile = findfile('CMakeLists.txt', expand('%:p:h').'/..')
-	endif
-	if !filereadable(makefile)
-		return 0
-	endif
-	let project_path = fnamemodify(makefile, ':p:h')
-	let project_name = 0
-	let is_gr_project = 0
-	for line in readfile(makefile)
-		if line =~ '^#'
-			continue
-		endif
-		if line =~? 'project(gr-[a-zA-Z_-]'
-			let project_name = substitute(line, 'project(gr-\([A-Za-z0-9_-]\+\).*$', '\1', '')
-		endif
-		if line =~? 'find_package(GnuradioCore)'
-			let is_gr_project = 1
-			if project_name
-				break
-			endif
-		endif
-	endfor
-	if !empty(project_name) && is_gr_project
-		let b:GRProjectPath = project_path
-		let b:GRProjectName = project_name
-		return 1
-	end
-	return 0
 endfunc
 
