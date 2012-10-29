@@ -25,3 +25,4 @@ map <S-F7> :C import sys; sys.exit(1)<CR>
 map <F10> :C next<CR>
 map <F11> :C step<CR>
 
+set number
