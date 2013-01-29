@@ -6,6 +6,8 @@ set softtabstop=4  " makes VIM see multiple space characters as tabstops,
 
 set number
 
+set list listchars=tab:>-
+
 """" Running Python scripts
 " Execute file being edited
 nnoremap <buffer> <F5> :w<CR>:!/usr/bin/env python % <CR>
