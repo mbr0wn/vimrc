@@ -27,6 +27,9 @@ nmap <C-BS> bdw
 nmap <F2> :NERDTreeToggle<CR>
 imap <F2> <ESC>:NERDTreeToggle<CR>
 
+nmap <F3> :TagbarToggle<CR>
+imap <F3> <ESC>:TagbarToggle<CR>
+
 " Omnicompletion on Ctrl-Space
 inoremap <C-Space> <C-X><C-O>
 
