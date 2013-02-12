@@ -1,6 +1,5 @@
 """""" Custom controls """"""""""""""
 " You know, keys and stuff
-let mapleader = ','
 
 " map colon to space bar (never need it in command mode anyway)
 nmap <Space> :
@@ -14,9 +13,9 @@ map <Tab> :bnext<Enter>
 map <S-Tab> :bprev<Enter>
 
 " tab shortkeys
-map <leader>tn :tabnew %<cr>
-map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove 
+"map <leader>tn :tabnew %<cr>
+"map <leader>tc :tabclose<cr>
+"map <leader>tm :tabmove 
 
 map <C-F12> :TMiniBufExplorer<cr>
 

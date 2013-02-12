@@ -1,5 +1,6 @@
 """ VIM config file - MB
 set nocompatible
+let mapleader = ','
 
 """""" Visual settings """"""""""""""
 " automatic syntax highlighting
