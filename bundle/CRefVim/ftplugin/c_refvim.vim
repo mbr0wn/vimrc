@@ -62,6 +62,7 @@ if !hasmapto('<Plug>CRV_CRefVimVisual')
 endif
 if !hasmapto('<Plug>CRV_CRefVimNormal')
     nmap <silent> <unique> <Leader>cr <Plug>CRV_CRefVimNormal
+    nmap <silent> <unique> K <Plug>CRV_CRefVimNormal
 endif
 if !hasmapto('<Plug>CRV_CRefVimAsk')
     map <silent> <unique> <Leader>cw <Plug>CRV_CRefVimAsk
