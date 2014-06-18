@@ -9,6 +9,19 @@ let g:Tex_ViewRule_ps  = 'evince'
 let g:Tex_ViewRule_pdf = 'evince'
 let g:Tex_Menus = 0
 
+let g:Tex_IgnoredWarnings =
+    \'Underfull'."\n".
+    \'Overfull'."\n".
+    \'specifier changed to'."\n".
+    \'You have requested'."\n".
+    \'Missing number, treated as zero.'."\n".
+    \'There were undefined references'."\n".
+    \'Citation %.%# undefined'."\n".
+    \'Marginpar'."\n".
+    \'No positions in optional float specifier'
+let g:Tex_IgnoreLevel = 9
+
+
 call IMAP('ESI', "\\SI{<++>}{<++>}<++>", 'tex')
 call IMAP('EFM', "\\begin{frame}\<cr> \\frametitle{<++>}\<cr> \\begin{itemize}\<cr> \\item <++>\<cr> \\end{itemize}<++>\<cr> \\end{frame}\<cr>", 'tex')
 
