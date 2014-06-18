@@ -76,6 +76,7 @@ call pathogen#infect()
 """""" Random features """"""""
 set ignorecase smartcase
 set foldmethod=syntax
+set hidden
 
 source $VIMRUNTIME/macros/matchit.vim
 
