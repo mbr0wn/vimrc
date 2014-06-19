@@ -17,7 +17,7 @@ map <S-Tab> :bprev<Enter>
 "map <leader>tc :tabclose<cr>
 "map <leader>tm :tabmove 
 
-map <C-F12> :TMiniBufExplorer<cr>
+map <C-F12> :MBEToggle<cr>
 
 " Ctrl-Backspace kill current word
 imap <C-BS> 

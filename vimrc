@@ -28,14 +28,12 @@ match WhiteSpaceEOL /\s\+$/
 autocmd WinEnter * match WhiteSpaceEOL /\s\+$/
 
 """""" Mini buffer explorer """""""""
-let g:miniBufExplSplitBelow = 0
-let g:miniBufExplModSelTarget = 1
-let g:miniBufExplModSelTarget = 0
+let g:miniBufExplBRSplit = 0
 let g:miniBufExplUseSingleClick = 1
 let g:miniBufExplMapWindowNavVim = 1
-"let g:miniBufExplVSplit = 20
 let g:miniBufExplMaxSize = 30
 "let g:miniBufExplForceSyntaxEnable = 1
+let g:miniBufExplBuffersNeeded=6
 
 
 """""" Filetype-specific hacks """"""
@@ -88,6 +86,7 @@ call pathogen#infect()
 """""" Random features """"""""
 set ignorecase smartcase
 set foldmethod=syntax
+set nofoldenable
 set hidden
 
 source $VIMRUNTIME/macros/matchit.vim

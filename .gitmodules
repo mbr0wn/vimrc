@@ -52,3 +52,6 @@
 [submodule "bundle/airline"]
 	path = bundle/airline
 	url = git@github.com:bling/vim-airline.git
+[submodule "bundle/minibufexpl"]
+	path = bundle/minibufexpl
+	url = git@github.com:techlivezheng/vim-plugin-minibufexpl.git
