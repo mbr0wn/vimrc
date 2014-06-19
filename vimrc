@@ -12,7 +12,8 @@ set ruler
 colorscheme delek
 if has("gui_running")
 	colorscheme desert
-	set guifont=Bitstream\ Vera\ Sans\ Mono\ 13
+	"set guifont=Bitstream\ Vera\ Sans\ Mono\ 13
+	set guifont=Liberation\ Mono\ for\ Powerline\ 15
     set go=
 end
 
@@ -39,7 +40,7 @@ let g:miniBufExplMaxSize = 30
 filetype plugin indent on
 
 " C options
-autocmd BufEnter *.i  :set filetype=cpp " *.is usually SWIG files for me
+autocmd BufEnter *.i  :set filetype=cpp " These are usually SWIG files for me
 
 "" Settings for latex suite.
 " REQUIRED. This makes vim invoke latex-suite when you open a tex file.
@@ -70,7 +71,15 @@ let g:syntastic_mode_map = { 'mode': 'active',
 						   \ 'passive_filetypes': ['python'] }
 
 
-set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+
+"""""" Airline """"""""""""""""""""""""""""""""
+if has("gui_running")
+	let g:airline_powerline_fonts = 1
+end
+let g:airline#extensions#tabline#enabled = 1
+set laststatus=2
+
+
 """""" Pathogen """"""""""""""""""""""""""""""""
 call pathogen#infect()
 

@@ -1,0 +1,4 @@
+
+Add font:
+1) cp to ~/.fonts
+2) Run fc-cache -vf ~/.fonts
