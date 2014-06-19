@@ -70,6 +70,7 @@ let g:syntastic_mode_map = { 'mode': 'active',
 						   \ 'passive_filetypes': ['python'] }
 
 
+set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 """""" Pathogen """"""""""""""""""""""""""""""""
 call pathogen#infect()
 
@@ -84,6 +85,7 @@ source $VIMRUNTIME/macros/matchit.vim
 let g:jedi#use_tabs_not_buffers = 0
 let g:jedi#popup_on_dot = 0
 let g:jedi#show_function_definition = 0
+
 
 " automatic folding
 "autocmd BufWinLeave *.* mkview
