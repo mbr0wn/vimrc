@@ -15,6 +15,8 @@ if has("gui_running")
 	"set guifont=Bitstream\ Vera\ Sans\ Mono\ 13
 	set guifont=Liberation\ Mono\ for\ Powerline\ 15
     set go=
+else
+	set t_Co=256
 end
 
 set termencoding=utf-8
