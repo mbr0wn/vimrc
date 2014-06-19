@@ -30,7 +30,7 @@
 	url = git://github.com/MarcWeber/vim-addon-mw-utils.git
 [submodule "bundle/snipmate-snippets"]
 	path = bundle/snipmate-snippets
-	url = https://github.com/honza/snipmate-snippets.git
+	url = git@github.com:honza/vim-snippets.git
 [submodule "bundle/grproject"]
 	path = bundle/grproject
 	url = git@github.com:mbant/grproject.vim.git
