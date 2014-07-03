@@ -13,6 +13,5 @@ set complete=.,w,b,u,t
 set list
 set listchars=tab:>-,nbsp:%
 
-" Run this file through g++ and run
-nnoremap <buffer> <F5> :w<CR>:!g++ % && ./a.out; rm a.out <CR>
-inoremap <buffer> <F5> <ESC>:w<CR>:!g++ % && ./a.out; rm a.out <CR>
+" Keymappings are in after/../cpp.vim, because otherwise, settings from c.vim
+" override this.
