@@ -33,7 +33,7 @@ let g:miniBufExplUseSingleClick = 1
 let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMaxSize = 30
 "let g:miniBufExplForceSyntaxEnable = 1
-let g:miniBufExplBuffersNeeded=6
+let g:miniBufExplBuffersNeeded=2
 
 
 """""" Filetype-specific hacks """"""
@@ -70,13 +70,14 @@ let g:syntastic_mode_map = { 'mode': 'active',
 						   \ 'active_filetypes': [],
 						   \ 'passive_filetypes': ['python'] }
 
-
+let g:syntastic_check_on_wq = 0
+let g:syntastic_ignore_files = ['\m^/usr/include/', '\m^/usr/lib/']
 
 """""" Airline """"""""""""""""""""""""""""""""
 if has("gui_running")
 	let g:airline_powerline_fonts = 1
 end
-let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#enabled = 1
 set laststatus=2
 
 
@@ -94,7 +95,7 @@ source $VIMRUNTIME/macros/matchit.vim
 """ Jedi
 let g:jedi#use_tabs_not_buffers = 0
 let g:jedi#popup_on_dot = 0
-let g:jedi#show_function_definition = 0
+"let g:jedi#show_call_signatures = 0 " Disable popup with arguments
 
 
 " automatic folding
