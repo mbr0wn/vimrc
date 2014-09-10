@@ -32,3 +32,6 @@ imap <F3> <ESC>:TagbarToggle<CR>
 " Omnicompletion on Ctrl-Space
 inoremap <C-Space> <C-X><C-O>
 
+noremap  l
+noremap  h
+
