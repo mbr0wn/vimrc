@@ -95,7 +95,7 @@ source $VIMRUNTIME/macros/matchit.vim
 """ Jedi
 let g:jedi#use_tabs_not_buffers = 0
 let g:jedi#popup_on_dot = 0
-"let g:jedi#show_call_signatures = 0 " Disable popup with arguments
+let g:jedi#show_call_signatures = 0 " Disable popup with arguments
 
 
 " automatic folding
