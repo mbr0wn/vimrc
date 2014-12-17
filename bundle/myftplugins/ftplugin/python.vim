@@ -8,20 +8,6 @@ set number
 
 set list listchars=tab:>-
 
-"""" Running Python scripts
-" Execute file being edited
-nnoremap <buffer> <F5> :w<CR>:!/usr/bin/env python % <CR>
-inoremap <buffer> <F5> <ESC>:w<CR>:!/usr/bin/env python % <CR>
-
-" Execute a selection of code (very cool!)
-" Use VISUAL to select a range and then hit F9 to execute it.
-python << EOP
-import vim
-def EvaluateCurrentRange():
-	eval(compile('\n'.join(vim.current.range),'','exec'),globals())
-EOP
-vnoremap <buffer> <F5> :py EvaluateCurrentRange()<CR>
-
 """" Pyclewn (pdb front-end)
 noremap <buffer> <S-F5> :w<CR>:Pyclewn pdb %:p<CR>:Cmapkeys<CR>
 noremap <buffer> <S-F7> :C import sys; sys.exit(1)<CR>:Cunmapkeys<CR>:bd (clewn)_console<CR>
