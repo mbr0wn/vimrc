@@ -70,3 +70,9 @@
 	path = bundle/minibufexpl
 	url = git@github.com:techlivezheng/vim-plugin-minibufexpl.git
 	branch = master
+[submodule "bundle/vim-easytags"]
+	path = bundle/vim-easytags
+	url = git@github.com:xolox/vim-easytags.git
+[submodule "bundle/vim-misc"]
+	path = bundle/vim-misc
+	url = git@github.com:xolox/vim-misc.git
