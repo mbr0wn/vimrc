@@ -76,3 +76,6 @@
 [submodule "bundle/vim-misc"]
 	path = bundle/vim-misc
 	url = git@github.com:xolox/vim-misc.git
+[submodule "bundle/hexmode"]
+	path = bundle/hexmode
+	url = https://github.com/fidian/hexmode.git
