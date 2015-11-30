@@ -10,5 +10,5 @@ endf
 " * paste into main()
 function! FileRunner_visual_pp()
     " TODO: Build a C++ file from the partial code
-    !g++ % && (./a.out; rm a.out)
+    !g++ -std=gnu++11 % && (./a.out; rm a.out)
 endf
