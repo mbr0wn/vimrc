@@ -92,11 +92,13 @@ set hidden
 
 source $VIMRUNTIME/macros/matchit.vim
 
-""" Jedi
+""" Jedi """""""""""""""""""""""""""""""""""""""
 let g:jedi#use_tabs_not_buffers = 0
 let g:jedi#popup_on_dot = 0
 let g:jedi#show_call_signatures = 0 " Disable popup with arguments
 
+""" Ag """""""""""""""""""""""""""""""""""""""""
+let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " automatic folding
 "autocmd BufWinLeave *.* mkview
