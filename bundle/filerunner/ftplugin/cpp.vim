@@ -1,7 +1,7 @@
 " FileRunner for C++: Compile and execute
 "
 function! FileRunner_normal_cpp()
-    !g++ % && (./a.out; rm a.out)
+    !g++ -std=gnu++11 % && (./a.out; rm a.out)
 endf
 
 " Visual mode:
