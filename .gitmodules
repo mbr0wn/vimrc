@@ -79,3 +79,6 @@
 [submodule "bundle/hexmode"]
 	path = bundle/hexmode
 	url = https://github.com/fidian/hexmode.git
+[submodule "bundle/snake"]
+	path = bundle/snake
+	url = https://github.com/amoffat/snake.git
