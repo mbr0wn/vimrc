@@ -66,10 +66,6 @@
 	path = bundle/airline
 	url = git@github.com:bling/vim-airline.git
 	branch = master
-[submodule "bundle/minibufexpl"]
-	path = bundle/minibufexpl
-	url = git@github.com:techlivezheng/vim-plugin-minibufexpl.git
-	branch = master
 [submodule "bundle/vim-easytags"]
 	path = bundle/vim-easytags
 	url = git@github.com:xolox/vim-easytags.git
