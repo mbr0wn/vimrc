@@ -78,3 +78,6 @@
 [submodule "bundle/snake"]
 	path = bundle/snake
 	url = https://github.com/amoffat/snake.git
+[submodule "bundle/minibufexpl"]
+	path = bundle/minibufexpl
+	url = https://github.com/weynhamz/vim-plugin-minibufexpl.git
