@@ -4,9 +4,9 @@ let g:Tex_FormatDependency_ps = 'dvi,ps'
 let g:Tex_CompileRule_dvi = 'latex -src-specials -interaction=nonstopmode $*'
 let g:Tex_CompileRule_ps = 'dvips -o $*.ps $*.dvi'
 let g:Tex_CompileRule_pdf = 'ps2pdf $*.ps'
-let g:Tex_ViewRule_dvi = 'evince'
-let g:Tex_ViewRule_ps  = 'evince'
-let g:Tex_ViewRule_pdf = 'evince'
+let g:Tex_ViewRule_dvi = 'xdg-open'
+let g:Tex_ViewRule_ps  = 'xdg-open'
+let g:Tex_ViewRule_pdf = 'xdg-open'
 let g:Tex_Menus = 0
 
 let g:Tex_IgnoredWarnings =
