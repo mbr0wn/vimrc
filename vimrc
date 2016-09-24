@@ -82,6 +82,7 @@ set laststatus=2
 
 
 """""" Pathogen """"""""""""""""""""""""""""""""
+let g:pathogen_blacklist = ['snake', 'grproject']
 call pathogen#infect()
 
 """""" Random features """"""""
