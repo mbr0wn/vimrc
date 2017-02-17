@@ -13,7 +13,7 @@ if v:version < 700
 	finish
 endif
 
-nnoremap <buffer> <F5> :w<CR>:call filerunner#run_normal()<CR>
-inoremap <buffer> <F5> <ESC>:w<CR>:call filerunner#run_normal()<CR>
-vnoremap <buffer> <F5> :call filerunner#run_visual()<CR>
+nnoremap <F5> :w<CR>:call filerunner#run_normal()<CR>
+inoremap <F5> <ESC>:w<CR>:call filerunner#run_normal()<CR>
+vnoremap <F5> :call filerunner#run_visual()<CR>
 
