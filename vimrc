@@ -9,7 +9,7 @@ syntax enable
 " Turn ruler on
 set ruler
 
-colorscheme delek
+colorscheme darkblue
 if has("gui_running")
 	colorscheme desert
 	"set guifont=Bitstream\ Vera\ Sans\ Mono\ 13
