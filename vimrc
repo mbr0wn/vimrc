@@ -80,6 +80,8 @@ end
 "let g:airline#extensions#tabline#enabled = 1
 set laststatus=2
 
+"""""" FZF """""""""""""""""""""""""""""""""""""
+let g:fzf_command_prefix = 'Fzf'
 
 """""" Pathogen """"""""""""""""""""""""""""""""
 let g:pathogen_blacklist = ['snake', 'grproject']
