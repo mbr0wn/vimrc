@@ -1,7 +1,7 @@
 " FileRunner for C++: Compile and execute
 "
 function! FileRunner_normal_cpp()
-    !g++ -std=gnu++11 % && (./a.out; rm a.out)
+    !g++ -std=gnu++14 % && (./a.out; rm a.out)
 endf
 
 " Visual mode:
@@ -10,5 +10,5 @@ endf
 " * paste into main()
 function! FileRunner_visual_pp()
     " TODO: Build a C++ file from the partial code
-    !g++ -std=gnu++11 % && (./a.out; rm a.out)
+    !g++ -std=gnu++14 % && (./a.out; rm a.out)
 endf
