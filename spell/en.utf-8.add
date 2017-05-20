@@ -76,3 +76,5 @@ packetization
 testbenches
 CHDR
 timestamp
+HDL
+DMA
