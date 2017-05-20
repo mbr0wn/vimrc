@@ -9,15 +9,7 @@ syntax enable
 " Turn ruler on
 set ruler
 
-colorscheme darkblue
-if has("gui_running")
-	colorscheme desert
-	"set guifont=Bitstream\ Vera\ Sans\ Mono\ 13
-	set guifont=Liberation\ Mono\ for\ Powerline\ 15
-    set go=
-else
-	set t_Co=256
-end
+" Colour needs to be set after pathogen, because it's a bundle
 
 set termencoding=utf-8
 set encoding=utf-8
@@ -86,6 +78,21 @@ let g:fzf_command_prefix = 'Fzf'
 """""" Pathogen """"""""""""""""""""""""""""""""
 let g:pathogen_blacklist = ['snake', 'grproject']
 call pathogen#infect()
+
+"""""" Color """""""""""""""""""""""""""""""""""
+if has("gui_running")
+	colorscheme solarized
+	set background=dark
+	"set guifont=Bitstream\ Vera\ Sans\ Mono\ 13
+	set guifont=Liberation\ Mono\ for\ Powerline\ 15
+    set go=
+else
+	" If the terminal is not using a solarized palette, we need this setting:
+	"let g:solarized_termcolors=256
+	colorscheme solarized
+	set background=dark
+	set t_Co=256
+end
 
 """""" Random features """"""""
 set ignorecase smartcase
