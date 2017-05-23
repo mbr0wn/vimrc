@@ -87,7 +87,7 @@ if has("gui_running")
     set go=
 else
 	" If the terminal is not using a solarized palette, we need this setting:
-	if $KONSOLE_PROFILE_NAME == "Shell"
+	if $KONSOLE_PROFILE_NAME == "Shell" || $SSH_CONNECTION
 		let g:solarized_termcolors=256
 	endif
 	colorscheme solarized
