@@ -66,7 +66,7 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_ignore_files = ['\m^/usr/include/', '\m^/usr/lib/']
 
 """""" Airline """"""""""""""""""""""""""""""""
-if has("gui_running")
+if has("gui_running") || $DISABLE_POWER_FONTS != "1"
 	let g:airline_powerline_fonts = 1
 end
 "let g:airline#extensions#tabline#enabled = 1
@@ -83,12 +83,13 @@ call pathogen#infect()
 if has("gui_running")
 	colorscheme solarized
 	set background=dark
-	"set guifont=Bitstream\ Vera\ Sans\ Mono\ 13
 	set guifont=Liberation\ Mono\ for\ Powerline\ 15
     set go=
 else
 	" If the terminal is not using a solarized palette, we need this setting:
-	"let g:solarized_termcolors=256
+	if $KONSOLE_PROFILE_NAME == "Shell"
+		let g:solarized_termcolors=256
+	endif
 	colorscheme solarized
 	set background=dark
 	set t_Co=256
