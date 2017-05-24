@@ -81,8 +81,6 @@ call pathogen#infect()
 
 """""" Color """""""""""""""""""""""""""""""""""
 if has("gui_running")
-	colorscheme solarized
-	set background=dark
 	set guifont=Liberation\ Mono\ for\ Powerline\ 15
     set go=
 else
@@ -90,10 +88,9 @@ else
 	if $KONSOLE_PROFILE_NAME == "Shell" || $SSH_CONNECTION
 		let g:solarized_termcolors=256
 	endif
-	colorscheme solarized
-	set background=dark
 	set t_Co=256
 end
+colorscheme solarized
 
 """""" Random features """"""""
 set ignorecase smartcase
@@ -127,3 +124,4 @@ set linebreak
 
 set clipboard=unnamedplus
 """"""""""""""""""""""""""""
+
