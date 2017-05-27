@@ -104,6 +104,11 @@ highlight WhiteSpaceEOL ctermbg=darkgreen guibg=lightgreen
 match WhiteSpaceEOL /\s\+$/
 autocmd WinEnter * match WhiteSpaceEOL /\s\+$/
 
+" autohighlight leading/trailing whitespaces
+highlight WhiteSpaceEOL ctermbg=darkgreen guibg=lightgreen
+match WhiteSpaceEOL /\s\+$/
+autocmd WinEnter * match WhiteSpaceEOL /\s\+$/
+
 """""" Random features """"""""
 set ignorecase smartcase
 set foldmethod=syntax
