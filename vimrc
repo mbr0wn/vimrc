@@ -19,11 +19,6 @@ if has("gui_running")
     set go=
 endif
 
-" autohighlight leading/trailing whitespaces
-highlight WhiteSpaceEOL ctermbg=darkgreen guibg=lightgreen
-match WhiteSpaceEOL /\s\+$/
-autocmd WinEnter * match WhiteSpaceEOL /\s\+$/
-
 """""" Mini buffer explorer """""""""
 let g:miniBufExplBRSplit = 0
 let g:miniBufExplUseSingleClick = 1
@@ -96,6 +91,11 @@ elseif !has("gui_running")
 	set t_Co=256
 endif
 colorscheme solarized
+
+" autohighlight leading/trailing whitespaces
+highlight WhiteSpaceEOL ctermbg=darkgreen guibg=lightgreen
+match WhiteSpaceEOL /\s\+$/
+autocmd WinEnter * match WhiteSpaceEOL /\s\+$/
 
 """""" Random features """"""""
 set ignorecase smartcase
