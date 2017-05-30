@@ -59,6 +59,7 @@ let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview
 
+
 let g:syntastic_mode_map = { 'mode': 'active',
 						   \ 'active_filetypes': [],
 						   \ 'passive_filetypes': ['python'] }
@@ -85,6 +86,11 @@ let g:fzf_command_prefix = 'Fzf'
 """""" Pathogen """"""""""""""""""""""""""""""""
 let g:pathogen_blacklist = ['snake', 'grproject', 'vim-easytags']
 call pathogen#infect()
+
+"""""" YouCompleteMe """"""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ycm_key_list_select_completion = ['<C-Space>', '<Down>', '<Enter>']
+let g:ycm_key_list_previous_completion = ['<S-C-Space>', '<Up>']
+
 
 """""" Color """""""""""""""""""""""""""""""""""
 if exists("g:solarized_forceterm16")

@@ -91,3 +91,6 @@
 [submodule "bundle/ale"]
 	path = bundle/ale
 	url = https://github.com/w0rp/ale
+[submodule "bundle/youcompleteme"]
+	path = bundle/youcompleteme
+	url = https://github.com/Valloric/YouCompleteMe.git
