@@ -14,6 +14,11 @@ set ruler
 set termencoding=utf-8
 set encoding=utf-8
 
+if has("gui_running")
+	set guifont=Liberation\ Mono\ for\ Powerline\ 15
+    set go=
+endif
+
 " autohighlight leading/trailing whitespaces
 highlight WhiteSpaceEOL ctermbg=darkgreen guibg=lightgreen
 match WhiteSpaceEOL /\s\+$/
@@ -80,16 +85,16 @@ let g:pathogen_blacklist = ['snake', 'grproject']
 call pathogen#infect()
 
 """""" Color """""""""""""""""""""""""""""""""""
-if has("gui_running")
-	set guifont=Liberation\ Mono\ for\ Powerline\ 15
-    set go=
-else
+
+if exists("g:solarized_forceterm16")
+	set background=dark
+elseif !has("gui_running")
 	" If the terminal is not using a solarized palette, we need this setting:
-	if $KONSOLE_PROFILE_NAME == "Shell" || $SSH_CONNECTION
+	if ($KONSOLE_PROFILE_NAME == "Shell" || $SSH_CONNECTION) && ($KONSOLE_PROFILE_NAME != "Solarized")
 		let g:solarized_termcolors=256
 	endif
 	set t_Co=256
-end
+endif
 colorscheme solarized
 
 """""" Random features """"""""
