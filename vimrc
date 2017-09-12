@@ -65,6 +65,7 @@ let g:syntastic_mode_map = { 'mode': 'active',
 
 let g:syntastic_check_on_wq = 0
 let g:syntastic_ignore_files = ['\m^/usr/include/', '\m^/usr/lib/']
+let g:syntastic_cpp_compiler_options = '-std=gnu++14'
 
 """""" Airline """"""""""""""""""""""""""""""""
 if has("gui_running") || $DISABLE_POWER_FONTS != "1"
