@@ -12,7 +12,7 @@
 	branch = master
 [submodule "bundle/syntastic"]
 	path = bundle/syntastic
-	url = git://github.com/scrooloose/syntastic.git
+	url = git://github.com/vim-syntastic/syntastic.git
 	branch = master
 [submodule "bundle/fugitive"]
 	path = bundle/fugitive
