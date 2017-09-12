@@ -7,6 +7,7 @@ set softtabstop=4  " makes VIM see multiple space characters as tabstops,
 set number
 
 set list listchars=tab:>-
+set cc=80
 
 """" Pyclewn (pdb front-end)
 noremap <buffer> <S-F5> :w<CR>:Pyclewn pdb %:p<CR>:Cmapkeys<CR>
