@@ -1,4 +1,5 @@
 """ VIM config file - MB
+" vim:sw=4 et:
 set nocompatible
 let mapleader = ','
 
@@ -80,17 +81,17 @@ let g:pathogen_blacklist = ['snake', 'grproject']
 call pathogen#infect()
 
 """""" Color """""""""""""""""""""""""""""""""""
-
 if exists("g:solarized_forceterm16")
-	set background=dark
+    set background=dark
 elseif !has("gui_running")
-	" If the terminal is not using a solarized palette, we need this setting:
-	if ($KONSOLE_PROFILE_NAME == "Shell" || $SSH_CONNECTION) && ($KONSOLE_PROFILE_NAME != "Solarized")
-		let g:solarized_termcolors=256
-	endif
-	set t_Co=256
+    " If the terminal is not using a solarized palette, we need this setting:
+    if ($KONSOLE_PROFILE_NAME == "Shell" || $SSH_CONNECTION) && ($KONSOLE_PROFILE_NAME != "Solarized")
+        let g:solarized_termcolors=256
+    endif
+    set t_Co=256
 endif
 colorscheme solarized
+set background=dark
 
 " autohighlight leading/trailing whitespaces
 highlight WhiteSpaceEOL ctermbg=darkgreen guibg=lightgreen
