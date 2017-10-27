@@ -78,3 +78,6 @@ CHDR
 timestamp
 HDL
 DMA
+GPIO
+msgpack
+msgpack
