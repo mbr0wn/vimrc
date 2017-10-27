@@ -67,6 +67,10 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_ignore_files = ['\m^/usr/include/', '\m^/usr/lib/']
 let g:syntastic_cpp_compiler_options = '-std=gnu++14'
 
+"""""" ALE """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ale_lint_on_text_changed = 'never'
+
+
 """""" Airline """"""""""""""""""""""""""""""""
 if has("gui_running") || $DISABLE_POWER_FONTS != "1"
 	let g:airline_powerline_fonts = 1
