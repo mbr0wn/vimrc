@@ -78,7 +78,7 @@ set laststatus=2
 let g:fzf_command_prefix = 'Fzf'
 
 """""" Pathogen """"""""""""""""""""""""""""""""
-let g:pathogen_blacklist = ['snake', 'grproject']
+let g:pathogen_blacklist = ['snake', 'grproject', 'vim-easytags']
 call pathogen#infect()
 
 """""" Color """""""""""""""""""""""""""""""""""
