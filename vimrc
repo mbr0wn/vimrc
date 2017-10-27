@@ -16,7 +16,7 @@ set termencoding=utf-8
 set encoding=utf-8
 
 if has("gui_running")
-	set guifont=Liberation\ Mono\ for\ Powerline\ 15
+	set guifont=Liberation\ Mono\ for\ Powerline\ 14
     set go=
 endif
 
