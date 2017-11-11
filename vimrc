@@ -69,6 +69,7 @@ let g:syntastic_cpp_compiler_options = '-std=gnu++14'
 
 """""" ALE """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ale_lint_on_text_changed = 'never'
+let g:ale_cpp_clangcheck_options = '-extra-arg=-std=c++14'
 
 
 """""" Airline """"""""""""""""""""""""""""""""
