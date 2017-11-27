@@ -90,6 +90,7 @@ call pathogen#infect()
 """""" YouCompleteMe """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ycm_key_list_select_completion = ['<C-Space>', '<Down>', '<Enter>']
 let g:ycm_key_list_previous_completion = ['<S-C-Space>', '<Up>']
+let g:ycm_min_num_of_chars_for_completion = 2
 
 
 """""" Color """""""""""""""""""""""""""""""""""
