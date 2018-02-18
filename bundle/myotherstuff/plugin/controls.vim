@@ -35,3 +35,11 @@ inoremap <C-Space> <C-X><C-O>
 noremap  l
 noremap  h
 
+" Make Enter and Backspace movements a bit more useful
+nnoremap <BS> {
+onoremap <BS> {
+vnoremap <BS> {
+
+nnoremap <expr> <CR> empty(&buftype) ? '}' : '<CR>'
+onoremap <expr> <CR> empty(&buftype) ? '}' : '<CR>'
+vnoremap <CR> }
