@@ -114,6 +114,9 @@ set ignorecase smartcase
 set foldmethod=syntax
 set nofoldenable
 set hidden
+if v:version > 703 || v:version == 703 && has('patch541')
+    set formatoptions+=j
+endif
 
 source $VIMRUNTIME/macros/matchit.vim
 
