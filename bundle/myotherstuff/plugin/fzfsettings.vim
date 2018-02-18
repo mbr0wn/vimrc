@@ -3,4 +3,5 @@
 
 " We re-enable the Ctrl-P functionality
 nmap <C-p> :FzfFiles<CR>
+nmap <S-p> :FzfGFiles<CR>
 
