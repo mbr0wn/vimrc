@@ -43,7 +43,3 @@ vnoremap <BS> {
 nnoremap <expr> <CR> empty(&buftype) ? '}' : '<CR>'
 onoremap <expr> <CR> empty(&buftype) ? '}' : '<CR>'
 vnoremap <CR> }
-
-" Keep selected text selected when fixing indentation
-vnoremap < <gv
-vnoremap > >gv
