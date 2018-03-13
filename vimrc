@@ -4,16 +4,8 @@ set nocompatible
 let mapleader = ','
 
 """""" Visual settings """"""""""""""
-" automatic syntax highlighting
-syntax enable
-
-" Turn ruler on
-set ruler
-
 " Colour needs to be set after pathogen, because it's a bundle
-
 set termencoding=utf-8
-set encoding=utf-8
 
 if has("gui_running")
 	set guifont=Liberation\ Mono\ for\ Powerline\ 14
@@ -30,10 +22,11 @@ let g:miniBufExplBuffersNeeded=2
 
 
 """""" Filetype-specific hacks """"""
-filetype plugin indent on
-
-" C options
+" C++ options
 autocmd BufEnter *.i  :set filetype=cpp " These are usually SWIG files for me
+
+" Markdown, not Modula-2
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 "" Settings for latex suite.
 " REQUIRED. This makes vim invoke latex-suite when you open a tex file.
@@ -59,14 +52,6 @@ let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview
 
-let g:syntastic_mode_map = { 'mode': 'active',
-						   \ 'active_filetypes': [],
-						   \ 'passive_filetypes': ['python'] }
-
-let g:syntastic_check_on_wq = 0
-let g:syntastic_ignore_files = ['\m^/usr/include/', '\m^/usr/lib/']
-let g:syntastic_cpp_compiler_options = '-std=gnu++14'
-
 """""" ALE """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_cpp_clangcheck_options = '-extra-arg=-std=c++14'
@@ -77,7 +62,6 @@ if has("gui_running") || $DISABLE_POWER_FONTS != "1"
 	let g:airline_powerline_fonts = 1
 end
 "let g:airline#extensions#tabline#enabled = 1
-set laststatus=2
 
 """""" FZF """""""""""""""""""""""""""""""""""""
 let g:fzf_command_prefix = 'Fzf'
@@ -114,11 +98,6 @@ set ignorecase smartcase
 set foldmethod=syntax
 set nofoldenable
 set hidden
-if v:version > 703 || v:version == 703 && has('patch541')
-    set formatoptions+=j
-endif
-
-source $VIMRUNTIME/macros/matchit.vim
 
 """ Jedi """""""""""""""""""""""""""""""""""""""
 let g:jedi#use_tabs_not_buffers = 0
