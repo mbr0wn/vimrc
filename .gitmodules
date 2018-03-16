@@ -22,10 +22,6 @@
 	path = bundle/tagbar
 	url = git://github.com/majutsushi/tagbar.git
 	branch = master
-[submodule "bundle/snipmate"]
-	path = bundle/snipmate
-	url = git://github.com/garbas/vim-snipmate.git
-	branch = master
 [submodule "bundle/tlib"]
 	path = bundle/tlib
 	url = git://github.com/tomtom/tlib_vim.git
@@ -99,3 +95,6 @@
 [submodule "bundle/vim-snippets"]
 	path = bundle/vim-snippets
 	url = https://github.com/honza/vim-snippets.git
+[submodule "bundle/ultisnips"]
+	path = bundle/ultisnips
+	url = https://github.com/SirVer/ultisnips.git
