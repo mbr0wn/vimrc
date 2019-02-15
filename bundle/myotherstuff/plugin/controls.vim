@@ -43,3 +43,7 @@ vnoremap <BS> {
 nnoremap <expr> <CR> empty(&buftype) ? '}' : '<CR>'
 onoremap <expr> <CR> empty(&buftype) ? '}' : '<CR>'
 vnoremap <CR> }
+
+" clang-format integration
+map <C-K> :py3f /usr/share/clang/clang-format-6.0/clang-format.py<CR>
+imap <C-K> <c-o>:py3f /usr/share/clang/clang-format-6.0/clang-format.py<CR>
