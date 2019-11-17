@@ -67,10 +67,6 @@ end
 """""" FZF """""""""""""""""""""""""""""""""""""
 let g:fzf_command_prefix = 'Fzf'
 
-"""""" Pathogen """"""""""""""""""""""""""""""""
-let g:pathogen_blacklist = ['snake', 'grproject', 'vim-easytags']
-call pathogen#infect()
-
 """""" Color """""""""""""""""""""""""""""""""""
 if exists("g:solarized_forceterm16")
     set background=dark
