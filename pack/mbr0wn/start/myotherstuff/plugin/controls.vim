@@ -15,7 +15,7 @@ map <S-Tab> :bprev<Enter>
 " tab shortkeys
 "map <leader>tn :tabnew %<cr>
 "map <leader>tc :tabclose<cr>
-"map <leader>tm :tabmove 
+"map <leader>tm :tabmove
 
 map <C-F12> :MBEToggle<cr>
 

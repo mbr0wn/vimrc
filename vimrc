@@ -29,7 +29,7 @@ autocmd BufEnter Makefile* :set filetype=make
 """""" ALE """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_cpp_clangcheck_options = '-extra-arg=-std=c++14'
-let g:ale_python_pylint_executable = 'pylint3'
+let g:ale_python_pylint_executable = 'pylint-3'
 
 
 """""" Airline """"""""""""""""""""""""""""""""
@@ -43,7 +43,7 @@ let g:fzf_command_prefix = 'Fzf'
 
 """""" Color """""""""""""""""""""""""""""""""""
 if exists("g:solarized_forceterm16")
-    set background=dark
+    set background=light
 elseif !has("gui_running")
     " If the terminal is not using a solarized palette, we need this setting:
     if ($KONSOLE_PROFILE_NAME == "Shell" || $SSH_CONNECTION) && ($KONSOLE_PROFILE_NAME != "Solarized")
@@ -52,7 +52,7 @@ elseif !has("gui_running")
     set t_Co=256
 endif
 colorscheme solarized
-set background=dark
+set background=light
 
 " autohighlight leading/trailing whitespaces
 highlight WhiteSpaceEOL ctermbg=darkgreen guibg=lightgreen
