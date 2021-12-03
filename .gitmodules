@@ -59,9 +59,6 @@
 [submodule "bundle/hexmode"]
 	path = pack/mbr0wn/start/hexmode
 	url = https://github.com/fidian/hexmode.git
-[submodule "bundle/minibufexpl"]
-	path = pack/mbr0wn/start/minibufexpl
-	url = https://github.com/weynhamz/vim-plugin-minibufexpl.git
 [submodule "bundle/fzf.vim"]
 	path = pack/mbr0wn/start/fzf.vim
 	url = https://github.com/junegunn/fzf.vim.git
@@ -101,3 +98,6 @@
 [submodule "bundle/rhubarb"]
 	path = pack/mbr0wn/start/rhubarb
 	url = https://github.com/tpope/vim-rhubarb.git
+[submodule "pack/mbr0wn/start/vim-buffet"]
+	path = pack/mbr0wn/start/vim-buffet
+	url = https://github.com/bagrat/vim-buffet.git
