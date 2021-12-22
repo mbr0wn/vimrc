@@ -62,7 +62,7 @@ let g:ale_python_pylint_executable = 'pylint3'
 if has("gui_running") || $DISABLE_POWER_FONTS != "1"
 	let g:airline_powerline_fonts = 1
 end
-"let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
 
 """""" FZF """""""""""""""""""""""""""""""""""""
 let g:fzf_command_prefix = 'Fzf'

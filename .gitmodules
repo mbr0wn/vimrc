@@ -98,6 +98,3 @@
 [submodule "bundle/rhubarb"]
 	path = pack/mbr0wn/start/rhubarb
 	url = https://github.com/tpope/vim-rhubarb.git
-[submodule "pack/mbr0wn/start/vim-buffet"]
-	path = pack/mbr0wn/start/vim-buffet
-	url = https://github.com/bagrat/vim-buffet.git
