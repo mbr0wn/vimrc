@@ -1,7 +1,3 @@
-" Include standard tags
-"set tags+=~/.vim/tags/cpp
-"set tags+=~/.vim/tags/boost
-
 set cindent
 set nowrap
 set foldmethod=syntax

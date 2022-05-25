@@ -12,15 +12,6 @@ if has("gui_running")
     set go=
 endif
 
-"""""" Mini buffer explorer """""""""
-let g:miniBufExplBRSplit = 0
-let g:miniBufExplUseSingleClick = 1
-let g:miniBufExplMapWindowNavVim = 1
-let g:miniBufExplMaxSize = 30
-"let g:miniBufExplForceSyntaxEnable = 1
-let g:miniBufExplBuffersNeeded=2
-
-
 """""" Filetype-specific hacks """"""
 " C++ options
 autocmd BufEnter *.i  :set filetype=cpp " These are usually SWIG files for me
@@ -34,23 +25,6 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 " Makefiles
 autocmd BufEnter Makefile* :set filetype=make
-
-"""""" CTags and tag list """"""""""""""""""""""
-command MkTags :!ctags -R --c++-kinds=+pl --fields=+iaS --extra=+q .
-
-
-"""""" OmniCppComplete """""""""""""""""""""""""
-let OmniCpp_GlobalScopeSearch = 1
-let OmniCpp_NamespaceSearch = 2 " 2: included 1: this file only
-let OmniCpp_ShowAccess = 1
-let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
-let OmniCpp_MayCompleteDot = 1 " autocomplete after .
-let OmniCpp_MayCompleteArrow = 0 " autocomplete after ->
-let OmniCpp_MayCompleteScope = 0 " autocomplete after ::
-let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
-" automatically open and close the popup menu / preview window
-au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-set completeopt=menuone,menu,longest,preview
 
 """""" ALE """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ale_lint_on_text_changed = 'never'
