@@ -98,3 +98,9 @@
 [submodule "bundle/rhubarb"]
 	path = pack/mbr0wn/start/rhubarb
 	url = https://github.com/tpope/vim-rhubarb.git
+[submodule "pack/mbr0wn/start/local_vimrc"]
+	path = pack/mbr0wn/start/local_vimrc
+	url = git@github.com:LucHermitte/local_vimrc.git
+[submodule "pack/mbr0wn/start/lh-vim-lib"]
+	path = pack/mbr0wn/start/lh-vim-lib
+	url = git@github.com:LucHermitte/lh-vim-lib.git
